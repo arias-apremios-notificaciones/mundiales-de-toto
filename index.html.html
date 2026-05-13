@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Argentina 1978 — Estadísticas Completas · Los Mundiales de Toto</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#061828;--celeste:#5BC0F0;--celeste2:#75C3E8;--dorado:#FFD700;--blanco:#FFFFFF;--rojo:#E63946;--verde:#2DC653}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:var(--navy);color:var(--blanco);min-height:100vh;overflow-x:hidden}
+.header{text-align:center;padding:36px 20px 28px;background:linear-gradient(180deg,rgba(91,192,240,.1) 0%,transparent 100%);border-bottom:2px solid rgba(255,215,0,.25)}
+.header-serie{font-size:12px;font-weight:800;letter-spacing:4px;color:var(--celeste);text-transform:uppercase;margin-bottom:6px}
+.header-titulo{font-size:clamp(26px,6vw,50px);font-weight:900;color:var(--dorado);line-height:1.1}
+.header-sub{font-size:clamp(13px,2.5vw,17px);color:var(--celeste2);margin-top:5px;font-weight:600}
+.estrella{font-size:44px;display:block;margin:10px auto 0;animation:pulso 2s ease-in-out infinite}
+@keyframes pulso{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.nav-tabs{position:sticky;top:0;z-index:100;display:flex;justify-content:center;gap:4px;padding:10px 12px;background:rgba(6,24,40,.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(91,192,240,.2);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab-btn{flex-shrink:0;background:rgba(91,192,240,.1);border:1px solid rgba(91,192,240,.3);color:var(--celeste);padding:8px 14px;border-radius:20px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;transition:all .2s;white-space:nowrap}
+.tab-btn.active,.tab-btn:hover{background:var(--celeste);color:var(--navy);border-color:var(--celeste)}
+.content{max-width:960px;margin:0 auto;padding:22px 14px 60px}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.sec-title{font-size:clamp(18px,4vw,26px);font-weight:900;color:var(--dorado);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.sec-title span{color:var(--blanco)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:24px}
+.stat-card{background:linear-gradient(135deg,rgba(91,192,240,.12),rgba(6,24,40,.8));border:1px solid rgba(91,192,240,.3);border-radius:14px;padding:16px 10px;text-align:center;transition:transform .2s}
+.stat-card:hover{transform:translateY(-3px)}
+.stat-n{font-size:clamp(26px,5vw,40px);font-weight:900;color:var(--dorado);line-height:1}
+.stat-l{font-size:10px;font-weight:800;letter-spacing:1.5px;color:var(--celeste);text-transform:uppercase;margin-top:5px}
+.grupo-box{background:rgba(10,37,64,.8);border:1px solid rgba(91,192,240,.2);border-radius:14px;margin-bottom:18px;overflow:hidden}
+.grupo-header{background:rgba(91,192,240,.1);padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(91,192,240,.15)}
+.grupo-titulo{font-size:14px;font-weight:900;color:var(--dorado)}
+.grupo-sede{font-size:11px;color:var(--celeste2);margin-left:auto}
+.tbl-pos{width:100%;border-collapse:collapse}
+.tbl-pos th{font-size:10px;font-weight:800;letter-spacing:1.5px;color:var(--celeste);text-transform:uppercase;padding:8px 10px;border-bottom:1px solid rgba(91,192,240,.2);text-align:center}
+.tbl-pos th:first-child{text-align:left}
+.tbl-pos td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px;font-weight:600;text-align:center}
+.tbl-pos td:first-child{text-align:left;font-weight:800}
+.tbl-pos tr:last-child td{border-bottom:none}
+.tbl-pos tr.cl td{color:var(--dorado)}
+.partidos-lista{padding:10px 14px 12px}
+.pm{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px}
+.pm:last-child{border-bottom:none}
+.pm-eq{flex:1;font-weight:700;color:var(--blanco)}
+.pm-sc{font-weight:900;color:var(--dorado);min-width:36px;text-align:center;font-size:14px}
+.pm-g{font-size:11px;color:var(--celeste2);flex:1.5;line-height:1.4}
+.pc{background:rgba(10,37,64,.8);border:1px solid rgba(91,192,240,.2);border-radius:11px;padding:12px 14px;margin-bottom:9px;display:flex;align-items:center;gap:10px;transition:all .2s}
+.pc:hover{border-color:rgba(91,192,240,.45);transform:translateX(3px)}
+.pc.fin{border-color:var(--dorado);background:linear-gradient(135deg,rgba(255,215,0,.09),rgba(10,37,64,.9))}
+.pc.der{border-color:rgba(230,57,70,.3)}
+.pc-fase{font-size:10px;font-weight:800;letter-spacing:1px;color:var(--celeste);text-transform:uppercase;min-width:55px}
+.pc-rival{font-size:14px;font-weight:800;color:var(--blanco)}
+.pc-g{font-size:12px;color:var(--celeste2);margin-top:2px}
+.pr{font-size:clamp(16px,4vw,22px);font-weight:900;min-width:50px;text-align:right}
+.prv{color:var(--dorado)}.pre{color:var(--celeste)}.prd{color:var(--rojo)}
+.tabla{width:100%;border-collapse:collapse;margin-bottom:24px}
+.tabla th{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--celeste);text-transform:uppercase;padding:9px 10px;border-bottom:1px solid rgba(91,192,240,.25);text-align:left}
+.tabla td{padding:11px 10px;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px;font-weight:600}
+.tabla tr:hover td{background:rgba(91,192,240,.06)}
+.tabla .arg{color:var(--dorado);font-weight:900}
+.gb{background:rgba(255,215,0,.13);color:var(--dorado);border-radius:20px;padding:2px 12px;font-weight:900;font-size:14px}
+.gbs{background:rgba(91,192,240,.13);color:var(--celeste);border-radius:20px;padding:2px 10px;font-size:13px}
+.tag{font-size:11px;background:rgba(91,192,240,.1);color:var(--celeste);padding:2px 7px;border-radius:7px}
+.ibox{background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.25);border-radius:11px;padding:13px 15px;margin-top:8px;font-size:14px;color:var(--celeste2);line-height:1.65}
+.ibox strong{color:var(--dorado)}
+.prg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-bottom:24px}
+.prk{background:rgba(10,37,64,.8);border:1px solid rgba(91,192,240,.2);border-radius:11px;padding:14px;display:flex;align-items:center;gap:12px}
+.pico{font-size:26px;flex-shrink:0}
+.pnom{font-size:11px;color:var(--celeste);font-weight:800}
+.pgan{font-size:15px;font-weight:900;color:var(--dorado)}
+.ppais{font-size:12px;color:var(--celeste2)}
+.cc{background:rgba(10,37,64,.8);border-left:4px solid var(--celeste);border-radius:0 11px 11px 0;padding:14px 16px;margin-bottom:11px;transition:all .2s}
+.cc:hover{border-left-color:var(--dorado);transform:translateX(4px)}
+.cn{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--celeste);text-transform:uppercase;margin-bottom:3px}
+.ct{font-size:15px;font-weight:900;color:var(--dorado);margin-bottom:5px}
+.cx{font-size:13px;color:rgba(255,255,255,.85);line-height:1.6}
+.tintro{text-align:center;padding:18px;background:rgba(91,192,240,.07);border-radius:14px;margin-bottom:22px;border:1px solid rgba(91,192,240,.2)}
+.pd{font-size:clamp(28px,7vw,50px);font-weight:900;color:var(--dorado);text-align:center;margin:6px 0}
+.qcard{background:rgba(10,37,64,.9);border:2px solid rgba(91,192,240,.2);border-radius:14px;padding:18px;margin-bottom:14px}
+.qcard.resp{border-color:rgba(91,192,240,.35)}
+.qnum{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--celeste);text-transform:uppercase;margin-bottom:6px}
+.qtxt{font-size:clamp(14px,3vw,17px);font-weight:800;color:var(--blanco);margin-bottom:12px;line-height:1.4}
+.ogrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.obtn{background:rgba(91,192,240,.08);border:1.5px solid rgba(91,192,240,.22);color:var(--blanco);padding:11px 13px;border-radius:9px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;text-align:left}
+.obtn:hover:not(:disabled){background:rgba(91,192,240,.2);border-color:var(--celeste);transform:translateY(-1px)}
+.obtn.ok{background:rgba(45,198,83,.2);border-color:#2DC653;color:#2DC653}
+.obtn.ko{background:rgba(230,57,70,.2);border-color:var(--rojo);color:var(--rojo)}
+.obtn:disabled{cursor:default}
+.fb{margin-top:10px;padding:9px 13px;border-radius:7px;font-size:13px;font-weight:700;display:none}
+.fb.si{background:rgba(45,198,83,.13);color:#2DC653;border:1px solid rgba(45,198,83,.28);display:block}
+.fb.no{background:rgba(230,57,70,.13);color:#ff7b84;border:1px solid rgba(230,57,70,.28);display:block}
+.rfinal{display:none;text-align:center;padding:28px 18px;background:linear-gradient(135deg,rgba(255,215,0,.09),rgba(91,192,240,.09));border:2px solid var(--dorado);border-radius:18px;margin-top:18px}
+.rfinal.show{display:block;animation:fadeIn .5s ease}
+.remo{font-size:58px;display:block;margin-bottom:10px}
+.rtit{font-size:clamp(20px,5vw,30px);font-weight:900;color:var(--dorado);margin-bottom:7px}
+.rdesc{font-size:15px;color:var(--celeste2);line-height:1.6;margin-bottom:18px}
+.brein{background:var(--dorado);color:var(--navy);border:none;padding:13px 30px;border-radius:28px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;cursor:pointer;transition:all .2s}
+.brein:hover{transform:scale(1.05)}
+.footer{text-align:center;padding:22px 16px;border-top:1px solid rgba(91,192,240,.12);color:rgba(255,255,255,.35);font-size:12px;font-weight:600;letter-spacing:1px}
+.footer span{color:var(--celeste)}
+.eq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-bottom:20px}
+.eq-card{background:rgba(10,37,64,.8);border:1px solid rgba(91,192,240,.2);border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700}
+.eq-card.cam{color:var(--dorado);border-color:rgba(255,215,0,.4)}
+@media(max-width:480px){.ogrid{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}.pm{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-serie">Los Mundiales de Toto · #1</div>
+  <h1 class="header-titulo">Argentina 1978</h1>
+  <div class="header-sub">La Primera Estrella — Estadísticas Completas y Trivia</div>
+  <span class="estrella">⭐</span>
+</div>
+<nav class="nav-tabs">
+  <button class="tab-btn active" onclick="showTab('resumen',this)">📊 Resumen</button>
+  <button class="tab-btn" onclick="showTab('primera',this)">🏟️ 1ª Fase</button>
+  <button class="tab-btn" onclick="showTab('segunda',this)">⚡ 2ª Fase</button>
+  <button class="tab-btn" onclick="showTab('argentina',this)">🇦🇷 Argentina</button>
+  <button class="tab-btn" onclick="showTab('goleadores',this)">🥾 Goleadores</button>
+  <button class="tab-btn" onclick="showTab('premios',this)">🏆 Premios</button>
+  <button class="tab-btn" onclick="showTab('curiosidades',this)">💡 Curiosidades</button>
+  <button class="tab-btn" onclick="showTab('trivia',this)">🎯 Trivia</button>
+</nav>
+<div class="content">
+
+<!-- RESUMEN -->
+<div id="tab-resumen" class="tab-panel active">
+  <div class="sec-title">📊 <span>Ficha del Torneo</span></div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-n">16</div><div class="stat-l">Equipos</div></div>
+    <div class="stat-card"><div class="stat-n">38</div><div class="stat-l">Partidos</div></div>
+    <div class="stat-card"><div class="stat-n">102</div><div class="stat-l">Goles</div></div>
+    <div class="stat-card"><div class="stat-n">2.68</div><div class="stat-l">Goles/partido</div></div>
+    <div class="stat-card"><div class="stat-n">5</div><div class="stat-l">Ciudades</div></div>
+    <div class="stat-card"><div class="stat-n">76.609</div><div class="stat-l">Final - asist.</div></div>
+  </div>
+  <div class="sec-title">🌍 <span>Los 16 Equipos</span></div>
+  <div class="eq-grid">
+    <div class="eq-card cam">🇦🇷 Argentina 🏆</div>
+    <div class="eq-card">🇳🇱 Holanda 🥈</div>
+    <div class="eq-card">🇧🇷 Brasil 🥉</div>
+    <div class="eq-card">🇮🇹 Italia 4°</div>
+    <div class="eq-card">🇩🇪 Alemania Occ.</div>
+    <div class="eq-card">🇵🇱 Polonia</div>
+    <div class="eq-card">🇵🇪 Perú</div>
+    <div class="eq-card">🇦🇹 Austria</div>
+    <div class="eq-card">🇫🇷 Francia</div>
+    <div class="eq-card">🇸🇪 Suecia</div>
+    <div class="eq-card">🇭🇺 Hungría</div>
+    <div class="eq-card">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia</div>
+    <div class="eq-card">🇹🇳 Túnez</div>
+    <div class="eq-card">🇮🇷 Irán</div>
+    <div class="eq-card">🇪🇸 España</div>
+    <div class="eq-card">🇲🇽 México</div>
+  </div>
+  <div class="ibox">
+    <strong>📅 Fechas:</strong> 1 al 25 de junio de 1978 · <strong>Sede:</strong> Argentina<br>
+    <strong>🏙️ Ciudades:</strong> Buenos Aires · Córdoba · Rosario · Mar del Plata · Mendoza<br>
+    <strong>🏆 Campeón:</strong> Argentina (primera estrella ⭐) · <strong>🥈 Subcampeón:</strong> Holanda
+  </div>
+</div>
+
+<!-- PRIMERA FASE -->
+<div id="tab-primera" class="tab-panel">
+  <div class="sec-title">🏟️ <span>Primera Fase — 4 Grupos</span></div>
+
+  <div class="grupo-box">
+    <div class="grupo-header"><div class="grupo-titulo">⭐ GRUPO 1</div><div class="grupo-sede">Buenos Aires · Mar del Plata</div></div>
+    <table class="tbl-pos">
+      <thead><tr><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>Pts</th></tr></thead>
+      <tbody>
+        <tr class="cl"><td>🇮🇹 Italia</td><td>3</td><td>3</td><td>0</td><td>0</td><td>6</td><td>2</td><td>6</td></tr>
+        <tr class="cl"><td>🇦🇷 Argentina</td><td>3</td><td>2</td><td>0</td><td>1</td><td>4</td><td>3</td><td>4</td></tr>
+        <tr><td>🇫🇷 Francia</td><td>3</td><td>1</td><td>0</td><td>2</td><td>5</td><td>5</td><td>2</td></tr>
+        <tr><td>🇭🇺 Hungría</td><td>3</td><td>0</td><td>0</td><td>3</td><td>3</td><td>8</td><td>0</td></tr>
+      </tbody>
+    </table>
+    <div class="partidos-lista">
+      <div class="pm"><span class="pm-eq">🇮🇹 Italia vs Francia 🇫🇷</span><span class="pm-sc">2-1</span><span class="pm-g">Rossi, Zaccarelli / Lacombe</span></div>
+      <div class="pm"><span class="pm-eq">🇦🇷 Argentina vs Hungría 🇭🇺</span><span class="pm-sc">2-1</span><span class="pm-g">Luque, Bertoni / Csapó</span></div>
+      <div class="pm"><span class="pm-eq">🇮🇹 Italia vs Hungría 🇭🇺</span><span class="pm-sc">3-1</span><span class="pm-g">Rossi ×2, Benetti / Törőcsik</span></div>
+      <div class="pm"><span class="pm-eq">🇦🇷 Argentina vs Francia 🇫🇷</span><span class="pm-sc">2-1</span><span class="pm-g">Passarella (p), Luque / Platini</span></div>
+      <div class="pm"><span class="pm-eq">🇫🇷 Francia vs Hungría 🇭🇺</span><span class="pm-sc">3-1</span><span class="pm-g">Lopez, Berdoll, Rocheteau / Zombori</span></div>
+      <div class="pm"><span class="pm-eq">🇦🇷 Argentina vs Italia 🇮🇹</span><span class="pm-sc" style="color:var(--rojo)">0-1</span><span class="pm-g">— / Bettega</span></div>
+    </div>
+  </div>
+
+  <div class="grupo-box">
+    <div class="grupo-header"><div class="grupo-titulo">GRUPO 2</div><div class="grupo-sede">Buenos Aires · Rosario</div></div>
+    <table class="tbl-pos">
+      <thead><tr><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>Pts</th></tr></thead>
+      <tbody>
+        <tr class="cl"><td>🇵🇱 Polonia</td><td>3</td><td>2</td><td>1</td><td>0</td><td>4</td><td>1</td><td>5</td></tr>
+        <tr class="cl"><td>🇩🇪 Alemania Occ.</td><td>3</td><td>1</td><td>2</td><td>0</td><td>6</td><td>0</td><td>4</td></tr>
+        <tr><td>🇹🇳 Túnez</td><td>3</td><td>1</td><td>1</td><td>1</td><td>3</td><td>2</td><td>3</td></tr>
+        <tr><td>🇲🇽 México</td><td>3</td><td>0</td><td>0</td><td>3</td><td>2</td><td>12</td><td>0</td></tr>
+      </tbody>
+    </table>
+    <div class="partidos-lista">
+      <div class="pm"><span class="pm-eq">🇩🇪 Alemania vs Polonia 🇵🇱</span><span class="pm-sc">0-0</span><span class="pm-g">Empate sin goles</span></div>
+      <div class="pm"><span class="pm-eq">🇹🇳 Túnez vs México 🇲🇽</span><span class="pm-sc">3-1</span><span class="pm-g">Kaabi, Ghommidh, Dhouieb / V.Ayala</span></div>
+      <div class="pm"><span class="pm-eq">🇵🇱 Polonia vs Túnez 🇹🇳</span><span class="pm-sc">1-0</span><span class="pm-g">Lato</span></div>
+      <div class="pm"><span class="pm-eq">🇩🇪 Alemania vs México 🇲🇽</span><span class="pm-sc">6-0</span><span class="pm-g">D.Müller ×2, H.Müller ×2, Rummenigge, Flohe</span></div>
+      <div class="pm"><span class="pm-eq">🇩🇪 Alemania vs Túnez 🇹🇳</span><span class="pm-sc">0-0</span><span class="pm-g">Empate sin goles</span></div>
+      <div class="pm"><span class="pm-eq">🇵🇱 Polonia vs México 🇲🇽</span><span class="pm-sc">3-1</span><span class="pm-g">Boniek, Deyna, Szarmach / Rangel</span></div>
+    </div>
+  </div>
+
+  <div class="grupo-box">
+    <div class="grupo-header"><div class="grupo-titulo">GRUPO 3</div><div class="grupo-sede">Mar del Plata · Buenos Aires</div></div>
+    <table class="tbl-pos">
+      <thead><tr><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>Pts</th></tr></thead>
+      <tbody>
+        <tr class="cl"><td>🇦🇹 Austria</td><td>3</td><td>2</td><td>0</td><td>1</td><td>3</td><td>2</td><td>4</td></tr>
+        <tr class="cl"><td>🇧🇷 Brasil</td><td>3</td><td>1</td><td>2</td><td>0</td><td>2</td><td>1</td><td>4</td></tr>
+        <tr><td>🇪🇸 España</td><td>3</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>3</td></tr>
+        <tr><td>🇸🇪 Suecia</td><td>3</td><td>0</td><td>1</td><td>2</td><td>1</td><td>3</td><td>1</td></tr>
+      </tbody>
+    </table>
+    <div class="partidos-lista">
+      <div class="pm"><span class="pm-eq">🇦🇹 Austria vs España 🇪🇸</span><span class="pm-sc">2-1</span><span class="pm-g">Schachner, Krankl / Dani</span></div>
+      <div class="pm"><span class="pm-eq">🇧🇷 Brasil vs Suecia 🇸🇪</span><span class="pm-sc">1-1</span><span class="pm-g">Reinaldo / Sjöberg</span></div>
+      <div class="pm"><span class="pm-eq">🇪🇸 España vs Brasil 🇧🇷</span><span class="pm-sc">0-0</span><span class="pm-g">Empate sin goles</span></div>
+      <div class="pm"><span class="pm-eq">🇦🇹 Austria vs Suecia 🇸🇪</span><span class="pm-sc">1-0</span><span class="pm-g">Krankl</span></div>
+      <div class="pm"><span class="pm-eq">🇦🇹 Austria vs Brasil 🇧🇷</span><span class="pm-sc">0-1</span><span class="pm-g">— / Roberto</span></div>
+      <div class="pm"><span class="pm-eq">🇪🇸 España vs Suecia 🇸🇪</span><span class="pm-sc">1-0</span><span class="pm-g">Asensi</span></div>
+    </div>
+  </div>
+
+  <div class="grupo-box">
+    <div class="grupo-header"><div class="grupo-titulo">GRUPO 4</div><div class="grupo-sede">Córdoba · Mendoza</div></div>
+    <table class="tbl-pos">
+      <thead><tr><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>Pts</th></tr></thead>
+      <tbody>
+        <tr class="cl"><td>🇵🇪 Perú</td><td>3</td><td>2</td><td>1</td><td>0</td><td>7</td><td>2</td><td>5</td></tr>
+        <tr class="cl"><td>🇳🇱 Holanda</td><td>3</td><td>1</td><td>1</td><td>1</td><td>5</td><td>3</td><td>3</td></tr>
+        <tr><td>🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia</td><td>3</td><td>1</td><td>1</td><td>1</td><td>5</td><td>6</td><td>3</td></tr>
+        <tr><td>🇮🇷 Irán</td><td>3</td><td>0</td><td>1</td><td>2</td><td>2</td><td>8</td><td>1</td></tr>
+      </tbody>
+    </table>
+    <div class="partidos-lista">
+      <div class="pm"><span class="pm-eq">🇵🇪 Perú vs Escocia 🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><span class="pm-sc">3-1</span><span class="pm-g">Cueto, Cubillas ×2 / Jordan</span></div>
+      <div class="pm"><span class="pm-eq">🇳🇱 Holanda vs Irán 🇮🇷</span><span class="pm-sc">3-0</span><span class="pm-g">Rensenbrink ×3</span></div>
+      <div class="pm"><span class="pm-eq">🇵🇪 Perú vs Holanda 🇳🇱</span><span class="pm-sc">0-0</span><span class="pm-g">Empate sin goles</span></div>
+      <div class="pm"><span class="pm-eq">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia vs Irán 🇮🇷</span><span class="pm-sc">1-1</span><span class="pm-g">Eskandarian (pp) / Danaifard</span></div>
+      <div class="pm"><span class="pm-eq">🇵🇪 Perú vs Irán 🇮🇷</span><span class="pm-sc">4-1</span><span class="pm-g">Velásquez, Cubillas ×2, Oblitas / Rowshan</span></div>
+      <div class="pm"><span class="pm-eq">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia vs Holanda 🇳🇱</span><span class="pm-sc">3-2</span><span class="pm-g">Dalglish, Gemmill ×2 / Rensenbrink, Rep</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SEGUNDA FASE -->
+<div id="tab-segunda" class="tab-panel">
+  <div class="sec-title">⚡ <span>Segunda Fase</span></div>
+
+  <div class="grupo-box">
+    <div class="grupo-header"><div class="grupo-titulo">GRUPO A</div><div class="grupo-sede">Rosario · Buenos Aires</div></div>
+    <table class="tbl-pos">
+      <thead><tr><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>Pts</th></tr></thead>
+      <tbody>
+        <tr class="cl"><td>🇳🇱 Holanda</td><td>3</td><td>2</td><td>1</td><td>0</td><td>9</td><td>4</td><td>5</td></tr>
+        <tr class="cl"><td>🇮🇹 Italia</td><td>3</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>3</td></tr>
+        <tr><td>🇩🇪 Alemania Occ.</td><td>3</td><td>0</td><td>2</td><td>1</td><td>4</td><td>5</td><td>2</td></tr>
+        <tr><td>🇦🇹 Austria</td><td>3</td><td>1</td><td>0</td><td>2</td><td>4</td><td>8</td><td>2</td></tr>
+      </tbody>
+    </table>
+    <div class="partidos-lista">
+      <div class="pm"><span class="pm-eq">🇮🇹 Italia vs Alemania 🇩🇪</span><span class="pm-sc">0-0</span><span class="pm-g">Empate sin goles</span></div>
+      <div class="pm"><span class="pm-eq">🇳🇱 Holanda vs Austria 🇦🇹</span><span class="pm-sc">5-1</span><span class="pm-g">Brandts, Rensenbrink ×2, Rep, W.v.d.Kerkhof / Obermayer</span></div>
+      <div class="pm"><span class="pm-eq">🇮🇹 Italia vs Austria 🇦🇹</span><span class="pm-sc">1-0</span><span class="pm-g">Rossi</span></div>
+      <div class="pm"><span class="pm-eq">🇳🇱 Holanda vs Alemania 🇩🇪</span><span class="pm-sc">2-2</span><span class="pm-g">Haan, Brandts / D.Müller, Rummenigge</span></div>
+      <div class="pm"><span class="pm-eq">🇳🇱 Holanda vs Italia 🇮🇹</span><span class="pm-sc">2-1</span><span class="pm-g">Brandts, Haan / Brandts (pp)</span></div>
+      <div class="pm"><span class="pm-eq">🇩🇪 Alemania vs Austria 🇦🇹</span><span class="pm-sc">2-3</span><span class="pm-g">Rummenigge, Hölzenbein / Vogts (pp), Krankl ×2</span></div>
+    </div>
+  </div>
+
+  <div class="grupo-box" style="border-color:rgba(255,215,0,.35)">
+    <div class="grupo-header" style="background:rgba(255,215,0,.1)"><div class="grupo-titulo">⭐ GRUPO B — Argentina</div><div class="grupo-sede">Córdoba · Mendoza · Rosario</div></div>
+    <table class="tbl-pos">
+      <thead><tr><th>Equipo</th><th>PJ</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>Pts</th></tr></thead>
+      <tbody>
+        <tr class="cl"><td>🇦🇷 Argentina</td><td>3</td><td>2</td><td>1</td><td>0</td><td>8</td><td>0</td><td>5</td></tr>
+        <tr class="cl"><td>🇧🇷 Brasil</td><td>3</td><td>2</td><td>1</td><td>0</td><td>6</td><td>1</td><td>5</td></tr>
+        <tr><td>🇵🇱 Polonia</td><td>3</td><td>1</td><td>0</td><td>2</td><td>2</td><td>5</td><td>2</td></tr>
+        <tr><td>🇵🇪 Perú</td><td>3</td><td>0</td><td>0</td><td>3</td><td>0</td><td>10</td><td>0</td></tr>
+      </tbody>
+    </table>
+    <div class="partidos-lista">
+      <div class="pm"><span class="pm-eq">🇦🇷 Argentina vs Polonia 🇵🇱</span><span class="pm-sc" style="color:var(--dorado)">2-0</span><span class="pm-g">Kempes ×2</span></div>
+      <div class="pm"><span class="pm-eq">🇧🇷 Brasil vs Perú 🇵🇪</span><span class="pm-sc">3-0</span><span class="pm-g">Dirceu, Zico, Nelinho</span></div>
+      <div class="pm"><span class="pm-eq">🇦🇷 Argentina vs Brasil 🇧🇷</span><span class="pm-sc" style="color:var(--celeste)">0-0</span><span class="pm-g">Empate sin goles</span></div>
+      <div class="pm"><span class="pm-eq">🇵🇱 Polonia vs Perú 🇵🇪</span><span class="pm-sc">1-0</span><span class="pm-g">Szarmach</span></div>
+      <div class="pm"><span class="pm-eq">🇧🇷 Brasil vs Polonia 🇵🇱</span><span class="pm-sc">3-1</span><span class="pm-g">Nelinho, Roberto, Dirceu / Lato</span></div>
+      <div class="pm" style="background:rgba(255,215,0,.06);border-radius:6px;padding:8px 4px"><span class="pm-eq" style="color:var(--dorado)">🇦🇷 Argentina vs Perú 🇵🇪 ⭐</span><span class="pm-sc" style="color:var(--dorado)">6-0</span><span class="pm-g">Kempes ×2, Tarantini, Luque ×2, Houseman</span></div>
+    </div>
+  </div>
+
+  <div class="sec-title" style="margin-top:10px">🏁 <span>Tercer Puesto y Final</span></div>
+  <div class="pc"><div class="pc-fase">3er Puesto</div><div style="flex:1"><div class="pc-rival">🇧🇷 Brasil vs Italia 🇮🇹</div><div class="pc-g">Nelinho, Dirceu / Causio</div></div><div class="pr prv">2-1</div></div>
+  <div class="pc fin"><div class="pc-fase" style="color:var(--dorado)">⭐ FINAL</div><div style="flex:1"><div class="pc-rival">🇦🇷 Argentina vs Holanda 🇳🇱</div><div class="pc-g">Kempes min.38 · Kempes min.104 · Bertoni min.115 / Nanninga min.82<br><span style="font-size:11px;color:rgba(255,255,255,.45)">25 jun · Monumental · Prórroga: 1-1 al 90'</span></div></div><div class="pr prv">3-1</div></div>
+</div>
+
+<!-- ARGENTINA -->
+<div id="tab-argentina" class="tab-panel">
+  <div class="sec-title">🇦🇷 <span>El Camino de Argentina</span></div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-n">7</div><div class="stat-l">Partidos</div></div>
+    <div class="stat-card"><div class="stat-n">5</div><div class="stat-l">Victorias</div></div>
+    <div class="stat-card"><div class="stat-n">1</div><div class="stat-l">Empates</div></div>
+    <div class="stat-card"><div class="stat-n">1</div><div class="stat-l">Derrotas</div></div>
+    <div class="stat-card"><div class="stat-n">15</div><div class="stat-l">Goles a favor</div></div>
+    <div class="stat-card"><div class="stat-n">4</div><div class="stat-l">Goles en contra</div></div>
+  </div>
+  <div class="pc"><div class="pc-fase">1ª Fase</div><div style="flex:1"><div class="pc-rival">vs Hungría 🇭🇺</div><div class="pc-g">⚽ Luque min.15 · Bertoni min.83</div></div><div class="pr prv">2-1</div></div>
+  <div class="pc"><div class="pc-fase">1ª Fase</div><div style="flex:1"><div class="pc-rival">vs Francia 🇫🇷</div><div class="pc-g">⚽ Passarella pen.45 · Luque min.73</div></div><div class="pr prv">2-1</div></div>
+  <div class="pc der"><div class="pc-fase">1ª Fase</div><div style="flex:1"><div class="pc-rival">vs Italia 🇮🇹</div><div class="pc-g">Sin goles argentinos</div></div><div class="pr prd">0-1</div></div>
+  <div class="pc"><div class="pc-fase">2ª Fase</div><div style="flex:1"><div class="pc-rival">vs Polonia 🇵🇱</div><div class="pc-g">⚽ Kempes min.16 · Kempes min.71</div></div><div class="pr prv">2-0</div></div>
+  <div class="pc"><div class="pc-fase">2ª Fase</div><div style="flex:1"><div class="pc-rival">vs Brasil 🇧🇷</div><div class="pc-g">Partido sin goles</div></div><div class="pr pre">0-0</div></div>
+  <div class="pc" style="border-color:rgba(255,215,0,.5);background:linear-gradient(135deg,rgba(255,215,0,.08),rgba(10,37,64,.9))">
+    <div class="pc-fase" style="color:var(--dorado)">2ª Fase</div>
+    <div style="flex:1"><div class="pc-rival" style="color:var(--dorado)">vs Perú 🇵🇪 ⭐</div><div class="pc-g">⚽ Kempes ×2 · Tarantini · Luque ×2 · Houseman</div></div>
+    <div class="pr prv">6-0</div>
+  </div>
+  <div class="pc fin"><div class="pc-fase" style="color:var(--dorado)">⭐ FINAL</div><div style="flex:1"><div class="pc-rival">vs Holanda 🇳🇱</div><div class="pc-g">⚽ Kempes min.38 · Kempes min.104 · Bertoni min.115</div></div><div class="pr prv">3-1</div></div>
+
+  <div class="sec-title" style="margin-top:22px">⚽ <span>Goles por jugador</span></div>
+  <table class="tabla">
+    <thead><tr><th>Jugador</th><th>Goles</th><th>Partidos donde marcó</th></tr></thead>
+    <tbody>
+      <tr class="arg"><td>Mario Kempes</td><td><span class="gb">6</span></td><td style="font-size:12px;color:var(--celeste2)">POL ×2 · PER ×2 · HOL ×2</td></tr>
+      <tr><td>Leopoldo Luque</td><td>4</td><td style="font-size:12px;color:var(--celeste2)">HUN · FRA · PER ×2</td></tr>
+      <tr><td>Daniel Bertoni</td><td>2</td><td style="font-size:12px;color:var(--celeste2)">HUN · HOL</td></tr>
+      <tr><td>Daniel Passarella</td><td>1</td><td style="font-size:12px;color:var(--celeste2)">FRA (pen.)</td></tr>
+      <tr><td>Omar Houseman</td><td>1</td><td style="font-size:12px;color:var(--celeste2)">PER</td></tr>
+      <tr><td>Alberto Tarantini</td><td>1</td><td style="font-size:12px;color:var(--celeste2)">PER</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- GOLEADORES -->
+<div id="tab-goleadores" class="tab-panel">
+  <div class="sec-title">🥾 <span>Top Goleadores del Torneo</span></div>
+  <table class="tabla">
+    <thead><tr><th>#</th><th>Jugador</th><th>País</th><th>Goles</th></tr></thead>
+    <tbody>
+      <tr class="arg"><td>🥇 1</td><td>Mario Kempes</td><td><span class="tag">🇦🇷 Argentina</span></td><td><span class="gb">6</span></td></tr>
+      <tr><td>🥈 2</td><td>Teófilo Cubillas</td><td><span class="tag">🇵🇪 Perú</span></td><td><span class="gbs">5</span></td></tr>
+      <tr><td>🥈 2</td><td>Rob Rensenbrink</td><td><span class="tag">🇳🇱 Holanda</span></td><td><span class="gbs">5</span></td></tr>
+      <tr><td>4</td><td>Hans Krankl</td><td><span class="tag">🇦🇹 Austria</span></td><td>4</td></tr>
+      <tr class="arg"><td>4</td><td>Leopoldo Luque</td><td><span class="tag">🇦🇷 Argentina</span></td><td>4</td></tr>
+      <tr><td>6</td><td>K-H. Rummenigge</td><td><span class="tag">🇩🇪 Alemania</span></td><td>3</td></tr>
+      <tr><td>6</td><td>Ernie Brandts</td><td><span class="tag">🇳🇱 Holanda</span></td><td>3</td></tr>
+      <tr><td>6</td><td>Grzegorz Lato</td><td><span class="tag">🇵🇱 Polonia</span></td><td>3</td></tr>
+      <tr><td>6</td><td>Paolo Rossi</td><td><span class="tag">🇮🇹 Italia</span></td><td>3</td></tr>
+      <tr><td>6</td><td>Dirceu</td><td><span class="tag">🇧🇷 Brasil</span></td><td>3</td></tr>
+    </tbody>
+  </table>
+  <div class="ibox"><strong>🇦🇷 Argentina marcó 15 goles en 7 partidos</strong> — el equipo más goleador del torneo. Kempes fue el máximo goleador con 6 tantos.</div>
+</div>
+
+<!-- PREMIOS -->
+<div id="tab-premios" class="tab-panel">
+  <div class="sec-title">🏆 <span>Premios Individuales</span></div>
+  <div class="prg">
+    <div class="prk"><div class="pico">🥾</div><div><div class="pnom">Bota de Oro · Goleador</div><div class="pgan">Mario Kempes</div><div class="ppais">🇦🇷 Argentina · 6 goles</div></div></div>
+    <div class="prk"><div class="pico">⭐</div><div><div class="pnom">Balón de Oro · Mejor jugador</div><div class="pgan">Mario Kempes</div><div class="ppais">🇦🇷 Argentina</div></div></div>
+    <div class="prk"><div class="pico">🧤</div><div><div class="pnom">Mejor Arquero</div><div class="pgan">Ubaldo "Pato" Fillol</div><div class="ppais">🇦🇷 Argentina</div></div></div>
+    <div class="prk"><div class="pico">🌟</div><div><div class="pnom">Mejor Jugador Joven</div><div class="pgan">Antonio Cabrini</div><div class="ppais">🇮🇹 Italia</div></div></div>
+    <div class="prk"><div class="pico">🤝</div><div><div class="pnom">Premio Fair Play</div><div class="pgan">Selección Argentina</div><div class="ppais">🇦🇷 Argentina</div></div></div>
+    <div class="prk"><div class="pico">🏆</div><div><div class="pnom">Campeón del Mundo</div><div class="pgan">Argentina ⭐</div><div class="ppais">Primera estrella</div></div></div>
+  </div>
+  <div class="ibox"><strong>Kempes ganó 3 premios en el mismo torneo:</strong> Bota de Oro, Balón de Oro y medalla de Campeón.</div>
+</div>
+
+<!-- CURIOSIDADES -->
+<div id="tab-curiosidades" class="tab-panel">
+  <div class="sec-title">💡 <span>Curiosidades del Mundial</span></div>
+  <div class="cc"><div class="cn">Curiosidad 01</div><div class="ct">🧔 El misterio del bigote</div><div class="cx">Kempes no marcó ningún gol en la primera fase con bigote. Se lo afeitó antes de la segunda fase y convirtió 6 goles. Uno de los datos más famosos del fútbol argentino.</div></div>
+  <div class="cc"><div class="cn">Curiosidad 02</div><div class="ct">📺 Blanco y negro vs. color</div><div class="cx">Mientras el resto del mundo veía el Mundial en color, la mayoría de los argentinos lo seguía en televisores blanco y negro. ¡El país anfitrión no veía sus propios colores!</div></div>
+  <div class="cc"><div class="cn">Curiosidad 03</div><div class="ct">🥅 El palo de Rensenbrink</div><div class="cx">A 14 segundos del final, con empate 1-1, el holandés Rensenbrink pegó en el palo. Si entraba, Holanda ganaba el Mundial. Ese palo cambió la historia argentina.</div></div>
+  <div class="cc"><div class="cn">Curiosidad 04</div><div class="ct">👦 Maradona quedó afuera</div><div class="cx">Diego Armando Maradona tenía 17 años y fue convocado pero quedó fuera de la lista definitiva. Ocho años después, sería él quien llevaría la Copa en México 1986.</div></div>
+  <div class="cc"><div class="cn">Curiosidad 05</div><div class="ct">👑 Cruyff no vino</div><div class="cx">Johan Cruyff, la gran estrella de Holanda, no participó. Meses antes había sufrido un intento de secuestro en España y decidió no viajar a Argentina.</div></div>
+  <div class="cc"><div class="cn">Curiosidad 06</div><div class="ct">🎊 El confetti del Monumental</div><div class="cx">En la final se lanzaron tantos papelitos blancos y celestes que el campo parecía cubierto de nieve. Las imágenes son de las más icónicas del fútbol mundial.</div></div>
+  <div class="cc"><div class="cn">Curiosidad 07</div><div class="ct">👕 Francia jugó con camiseta de club</div><div class="cx">En su partido vs. Hungría, Francia descubrió que sus uniformes eran del mismo color. Tuvieron que pedir prestadas camisetas de un club local de Mar del Plata.</div></div>
+  <div class="cc"><div class="cn">Curiosidad 08</div><div class="ct">⏳ 48 años de espera</div><div class="cx">Argentina había participado en todos los Mundiales desde 1930 sin poder ganar. Esperó 48 años para finalmente coronarse campeón en su propio suelo.</div></div>
+</div>
+
+<!-- TRIVIA -->
+<div id="tab-trivia" class="tab-panel">
+  <div class="sec-title">🎯 <span>¡Trivia del Mundial!</span></div>
+  <div class="tintro">
+    <p>¿Cuánto aprendiste leyendo el libro?<br><strong style="color:var(--dorado)">8 preguntas · 1 punto cada una</strong></p>
+    <div class="pd" id="puntaje">0 / 8</div>
+  </div>
+  <div id="qcontainer"></div>
+  <div id="rfinal" class="rfinal"></div>
+</div>
+
+</div>
+<div class="footer"><span>LOS MUNDIALES DE TOTO</span> · Argentina 1978 · La Primera Estrella<br>© Cosette, 2025 · Libroteca Digital SAS</div>
+<script>
+function showTab(id,btn){document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+id).classList.add('active');btn.classList.add('active')}
+const QQ=[
+  {p:"¿Cuántos goles marcó Kempes en el Mundial '78?",o:["4 goles","5 goles","6 goles","7 goles"],c:2,e:"¡Correcto! Kempes marcó 6 goles y fue el goleador del torneo."},
+  {p:"¿Cuántas personas llenaron el Monumental en la final?",o:["50.000","66.000","76.609","100.000"],c:2,e:"76.609 personas vivieron la final en el Estadio Monumental de Buenos Aires."},
+  {p:"¿A qué país venció Argentina en la final?",o:["Alemania","Brasil","Perú","Holanda"],c:3,e:"Argentina venció a Holanda 3-1 en la prórroga."},
+  {p:"¿Cuántos goles le hizo Argentina a Perú en la 2ª fase?",o:["3 goles","4 goles","5 goles","6 goles"],c:3,e:"Argentina goleó 6-0 a Perú con goles de Kempes ×2, Tarantini, Luque ×2 y Houseman."},
+  {p:"¿Quién fue elegido mejor arquero del torneo?",o:["Fillol","Kempes","Passarella","Bertoni"],c:0,e:"Ubaldo 'Pato' Fillol fue elegido el mejor arquero del Mundial 1978."},
+  {p:"¿Cuántos segundos faltaban cuando la pelota pegó en el palo?",o:["30 segundos","20 segundos","14 segundos","5 segundos"],c:2,e:"A solo 14 segundos del final, con 1-1, Rensenbrink pegó en el palo."},
+  {p:"¿Cuántos equipos participaron en el Mundial 1978?",o:["12 equipos","16 equipos","24 equipos","32 equipos"],c:1,e:"16 selecciones participaron en el Mundial 1978 organizado en Argentina."},
+  {p:"¿Cuántos años esperó Argentina para ganar su primer Mundial?",o:["28 años","38 años","48 años","58 años"],c:2,e:"Argentina esperó 48 años desde su primera final en 1930 hasta el primer título en 1978."}
+];
+let pts=0,resp=0;
+function render(){const c=document.getElementById('qcontainer');c.innerHTML='';QQ.forEach((q,i)=>{const d=document.createElement('div');d.className='qcard';d.id='q'+i;d.innerHTML=`<div class="qnum">Pregunta ${i+1} de ${QQ.length}</div><div class="qtxt">${q.p}</div><div class="ogrid">${q.o.map((o,j)=>`<button class="obtn" onclick="ans(${i},${j})">${o}</button>`).join('')}</div><div id="f${i}" class="fb"></div>`;c.appendChild(d)})}
+function ans(qi,oi){const q=QQ[qi],d=document.getElementById('q'+qi);if(d.classList.contains('resp'))return;d.classList.add('resp');const bs=d.querySelectorAll('.obtn');bs.forEach(b=>b.disabled=true);const fb=document.getElementById('f'+qi);if(oi===q.c){bs[oi].classList.add('ok');fb.textContent='✅ '+q.e;fb.className='fb si';pts++;}else{bs[oi].classList.add('ko');bs[q.c].classList.add('ok');fb.textContent='❌ Correcta: '+q.o[q.c]+'. '+q.e;fb.className='fb no';}resp++;document.getElementById('puntaje').textContent=pts+' / '+QQ.length;if(resp===QQ.length)setTimeout(fin,600)}
+function fin(){const d=document.getElementById('rfinal');d.classList.add('show');let e,t,x;if(pts===8){e='🏆';t='¡Campeón del Mundo!';x="¡Perfecto! Sabés todo sobre el Mundial del '78. ¡Sos como el Abuelo Toto!";}else if(pts>=6){e='⭐';t='¡Primera Estrella!';x=pts+'/8 correctas. ¡Muy bien! Ya podés contarle la historia a tus amigos.';}else if(pts>=4){e='⚽';t='¡Buen partido!';x=pts+'/8 correctas. Bien, pero hay que repasar un poco más el libro...';}else{e='📖';t='¡Volvé a leer!';x=pts+'/8 correctas. Toto dice que hay que leer el libro de nuevo. ¡Podés mejorar!';}d.innerHTML=`<span class="remo">${e}</span><div class="rtit">${t}</div><div class="rdesc">${x}</div><button class="brein" onclick="reset()">🔄 Jugar de nuevo</button>`;}
+function reset(){pts=0;resp=0;document.getElementById('puntaje').textContent='0 / '+QQ.length;document.getElementById('rfinal').classList.remove('show');render();}
+render();
+</script>
+</body>
+</html>
